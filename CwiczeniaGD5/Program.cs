@@ -138,7 +138,7 @@ class LinkedListGD {
 
 		//Console.WriteLine("     Probuje usunąć element " + nodeValue);     // USTAWIENIE HEAD
 
-		bool nodeFound = false;
+		//bool nodeFound = false;
 
 		NodeGD NodeToDelete = CurrentNode;
 		GoToStart(ref NodeToDelete);
@@ -166,7 +166,7 @@ class LinkedListGD {
 					CurrentNode = NodeToDelete.Next;
 				}
 
-				nodeFound = true;
+				//nodeFound = true;
 				Count--;
 			}
 
@@ -203,7 +203,6 @@ class LinkedListGD {
 		}
 		Console.WriteLine();
 	}
-
 
 	public void ExecuteListGD(ParserGD parser) {
 
@@ -245,7 +244,6 @@ class LinkedListGD {
 		}
 
 		PrintListGD(ref CurrentNode, Count);
-
 	}
 }
 
@@ -274,7 +272,6 @@ class ParserGD {
 		string fileEntry;
 
 		try {
-
 			using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read)) {
 				StreamReader streamReader = new StreamReader(fileStream);
 				while ((fileEntry = streamReader.ReadLine()) != "P") {
@@ -320,7 +317,6 @@ class ParserGD {
 	public string[,] GetSubDataEntries() {
 		return SubData;
 	}
-
 }
 
 
