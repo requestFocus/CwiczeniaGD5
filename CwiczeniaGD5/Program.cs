@@ -63,7 +63,7 @@ class LinkedListGD {
 			else if (position == Count) {           // ELEMENT NA KONCU
 
 				NodeGD MiddleToEnd = CurrentNode;
-				GoToStart(ref MiddleToEnd);
+				GoToStart(ref MiddleToEnd); 
 
 				while (MiddleToEnd.Next != null) {                  // przesuwa na ostatni element listy
 					MiddleToEnd = MiddleToEnd.Next;
