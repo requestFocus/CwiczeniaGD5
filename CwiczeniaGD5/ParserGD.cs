@@ -7,20 +7,14 @@ namespace CwiczeniaGD5
 
 	class ParserGD {
 
-		string Path = "data.txt";
-		ArrayList ListToParse;
-		string[,] SubData;
+		public string Path { get; private set; }  = "data.txt";
+		public ArrayList ListToParse { get; private set; }
+		public string[,] SubData { get; private set; }
 
 		public ParserGD() {
-			//new ParserGD(Path);
 			this.ListToParse = OpenFileSaveRawData(Path);
 			ParseData(ListToParse);
 		}
-
-		//public ParserGD(string Path) {
-		//	this.Path = Path;
-		//	new ParserGD();
-		//}
 
 		private ArrayList OpenFileSaveRawData(string Path) {            // SPRAWDZ CZY DANE SA POPRAWNE!
 

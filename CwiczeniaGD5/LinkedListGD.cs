@@ -4,8 +4,8 @@ namespace CwiczeniaGD5 {
 
 	class LinkedListGD {
 
-		public NodeGD CurrentNode;
-		public int Count;
+		public NodeGD CurrentNode;						// czy jeśli dam tutaj { get; private set; } to pokaże się błąd, bo miejsce na definiowanie NodeGD jest w konstruktorze NodeGD?
+		public int Count { get; private set; }
 
 		public LinkedListGD() {
 
@@ -14,9 +14,9 @@ namespace CwiczeniaGD5 {
 
 		public class NodeGD {
 
-			public NodeGD Previous;
-			public NodeGD Next;
-			public int Value;
+			public NodeGD Previous { get; set; }
+			public NodeGD Next { get; set; }
+			public int Value { get; set; }
 		}
 
 		//================AddNodeGD
@@ -79,7 +79,7 @@ namespace CwiczeniaGD5 {
 			}
 			Count++;
 
-			//PrintListGD(ref CurrentNode, Count);				// aby umożliwić wypisanie wszystkich kroków
+			//PrintListGD(ref CurrentNode, Count);				// aby umożliwić wypisanie zawartości listy po dodaniu elementu
 		}
 
 		//================GoToStart
@@ -100,10 +100,11 @@ namespace CwiczeniaGD5 {
 
 		private void DeleteNodeGD(int nodeValue) {
 
-			//bool nodeFound = false;							// jeśli istotne jest sprawdzenie czy element do usunięcia występował na liście
+			bool nodeFound = false;								// true, jeśli szukany element znajduje sie na liscie
 
 			NodeGD NodeToDelete = CurrentNode;
-			GoToStart(ref NodeToDelete);
+
+			GoToStart(ref NodeToDelete);						// ustawia sie na pierwszym elemencie listy
 
 			while (NodeToDelete != null) {                      // sprawdzaj dopoki aktualnie sprawdzany node nie jest nullem
 
@@ -128,17 +129,17 @@ namespace CwiczeniaGD5 {
 						CurrentNode = NodeToDelete.Next;
 					}
 
-					//nodeFound = true;							// jeśli istotne jest sprawdzenie czy element do usunięcia występował na liście
+					nodeFound = true;                           // element wyznaczony do usuniecia znajduje sie na liście
 					Count--;
 				}
 
 				NodeToDelete = NodeToDelete.Next;               // przejdz na nastepny nod
 			}
 
-			//if (!nodeFound)									// jeśli istotne jest sprawdzenie czy element do usunięcia występował na liście
-			//	Console.WriteLine("     Elementu do usunięcia nie ma na liście");
+			if (!nodeFound)										// jesli elementu wyznaczonego do usuniecia nie ma na liscie
+				Console.WriteLine("Element " + nodeValue + " nie jest elementem listy i nie może zostać usunięty");
 
-			//PrintListGD(ref CurrentNode, Count);				// aby umożliwić wypisanie wszystkich kroków
+			//PrintListGD(ref CurrentNode, Count);				// aby umożliwić wypisanie zawartości listy po usunięciu elementu
 		}
 
 		//================PrintListGD
@@ -146,12 +147,8 @@ namespace CwiczeniaGD5 {
 		private void PrintListGD(ref NodeGD node, int count) {
 
 			NodeGD PrintNode = node;
-			NodeGD temp = PrintNode;
-			while (PrintNode.Previous != null) {
-				temp = PrintNode;                             // do zmiennej tymczasowej leci aktualna pozycja PrintNode
-				PrintNode = PrintNode.Previous;               // do aktualnej pozycji PrintNode leci poprzednia pozycja PrintNode
-				PrintNode.Next = temp;                        // do następnej pozycji PrintNode leci zmienna tymczasowa
-			}
+
+			GoToStart(ref PrintNode);
 
 			Console.Write("List: ");
 			while (PrintNode != null) {
