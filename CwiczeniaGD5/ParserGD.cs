@@ -46,8 +46,16 @@ namespace CwiczeniaGD5
 			SubData = new string[EntryCount, 3];                            // deklaracja i zainicjalizowanie tablicy dwuwymiarowej SubData[,] wg entryCount
 			EntryCount = 0;                                             // wyzerowanie entryCount na potrzeby indeksowania SubData[][]
 
-			foreach (string lineEntry in listToParse) {                 // dla każdego wpisu w ArrayList
-				string[] SubDataEntry = lineEntry.Split('_');           // do subFileEntry wpisywana jest tylko jedna linia na raz
+			foreach (string LineEntry in listToParse) {                 // dla każdego wpisu w ArrayList
+				//if (LineEntry.Substring(0, 1) != "i") {				// ZALATW TO WYRAZENIEM REGULARNYM i podkreslenie JAKASLICZBA podkreslenie JAKASLICZBA lub d podkreslenie JAKASLICZBA
+				//	if (LineEntry.Substring(0, 1) != "d") {
+				//		Console.WriteLine("Lista zawiera niedozwolony wpis. Wpis został usunięty.");
+				//		continue;
+				//	}
+				//	continue;
+				//}
+
+				string[] SubDataEntry = LineEntry.Split('_');           // do subFileEntry wpisywana jest tylko jedna linia na raz
 				SubData[EntryCount, 0] = SubDataEntry[0];               // wstaw string z SubDataEntry[0] do Subdata[i][0]
 				SubData[EntryCount, 1] = SubDataEntry[1];               // wstaw string z SubDataEntry[0] do Subdata[i][0]
 				if (SubDataEntry[0] == "i") {                           // tylko jeśli pierwszy element Entry[] jest rowny i
