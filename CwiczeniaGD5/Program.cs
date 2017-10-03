@@ -17,7 +17,6 @@ namespace CwiczeniaGD5 {
 
 			linkedListGD.ExecuteListGD(parser);
 
-			Console.ReadLine();
 		}
 	}
 }
