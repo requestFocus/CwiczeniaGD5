@@ -40,7 +40,7 @@ namespace CwiczeniaGD5
             }
 
             return RawData;
-		}
+		} 
 
 		//================ParseData(ArrayList listToParse)
 
