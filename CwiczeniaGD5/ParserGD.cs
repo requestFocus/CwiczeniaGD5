@@ -36,7 +36,7 @@ namespace CwiczeniaGD5
 			catch (Exception ex) {
                 Console.WriteLine(ex.Message + " Umieść plik we właściwym katalogu");
                 Console.ReadLine();
-                Environment.Exit(0);
+                Environment.Exit(0);														// nie ma potrzeby przekazania stosu, więc jeśli nie można otworzyć pliku to program ma zakończyć działanie
             }
 
             return RawData;
