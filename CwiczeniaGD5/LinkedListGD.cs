@@ -4,7 +4,7 @@ namespace CwiczeniaGD5 {
 
 	class LinkedListGD {
 
-		public NodeGD CurrentNode;						// PYTANIE: czy jeśli dam tutaj { get; private set; } to pokaże się błąd, bo miejsce na definiowanie NodeGD jest w konstruktorze NodeGD?
+		public NodeGD CurrentNode;						
 		public int Count { get; private set; }
 
 		public LinkedListGD() {
@@ -87,8 +87,8 @@ namespace CwiczeniaGD5 {
 			}
 			Count++;
 
-			//PrintListGD(ref CurrentNode, Count);                // aby umożliwić wypisanie zawartości listy po dodaniu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
-		}
+            //PrintListGD(ref CurrentNode, Count);                // aby umożliwić wypisanie zawartości listy po dodaniu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
+        }
 
 		//================DeleteNodeGD - USUŃ WĘZEŁ
 
@@ -135,8 +135,8 @@ namespace CwiczeniaGD5 {
 			if (!nodeFound)											// jesli elementu wyznaczonego do usuniecia nie ma na liscie
 				Console.WriteLine("Element " + nodeValue + " nie jest elementem listy i nie może zostać usunięty");
 
-			//PrintListGD(ref CurrentNode, Count);					// aby umożliwić wypisanie zawartości listy po usunięciu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
-		}
+            //PrintListGD(ref CurrentNode, Count);                    // aby umożliwić wypisanie zawartości listy po usunięciu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
+        }
 
 		//================PrintListGD - WYPISZ LISTĘ
 
@@ -179,8 +179,8 @@ namespace CwiczeniaGD5 {
 					DeleteNodeGD(Int32.Parse(SubDataToParse[i, 1]));										// usuń go z listy wg danych z tablicy dwuwymiarowej
 			}
 
-			PrintListGD(ref CurrentNode, Count);                            // wypisz zawartość tablicy na ekran
-			Console.ReadLine();
+            PrintListGD(ref CurrentNode, Count);                            // wypisz zawartość tablicy na ekran
+            Console.ReadLine();
 		}
 	}
 }
