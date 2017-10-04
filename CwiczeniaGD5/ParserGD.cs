@@ -34,10 +34,12 @@ namespace CwiczeniaGD5
 				}
 			}
 			catch (Exception ex) {
-				Console.WriteLine(ex.Message + " Umieść plik we właściwym katalogu");
-			}
+                Console.WriteLine(ex.Message + " Umieść plik we właściwym katalogu");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
 
-			return RawData;
+            return RawData;
 		}
 
 		//================ParseData(ArrayList listToParse)
