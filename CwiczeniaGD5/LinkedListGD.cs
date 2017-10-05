@@ -169,9 +169,8 @@ namespace CwiczeniaGD5 {
 
 		//================ExecuteListGD	- WYKONAJ OPERACJE NA DANYCH Z PAMIĘCI, STWORZ LISTĘ I WYPISZ JĄ NA EKRAN
 
-		public void ExecuteListGD(ParserGD parser) {
+		public void ExecuteListGD(string[,] SubDataToParse) {							// jako argument dostanie sparsowaną tablicę 2D elementów odczytanych z pliku
 
-			string[,] SubDataToParse = parser.GetSubDataEntries();			// zarezerwuj sobie miejsce na tablicę dwuwymiarową dla sparsowanych danych przechowywanych w pamięci
 			for (int i = 0; i < SubDataToParse.GetLength(0); i++) {			
 				if (SubDataToParse[i, 0] == "i")															// jeśli element ma zostać dodany do listy
 					AddNodeGD(Int32.Parse(SubDataToParse[i, 1]), Int32.Parse(SubDataToParse[i, 2]));		// dodaj go do listy wg danych z tablicy dwuwymiarowej

@@ -14,8 +14,7 @@ namespace CwiczeniaGD5
 		public int EntryCount { get; private set; }
 
 		public ParserGD() {
-			this.ListToParse = OpenFileSaveRawData(Path);
-			ParseData(ListToParse);
+
 		}
 
 		//================OpenFileSaveRawData(string Path)
@@ -42,9 +41,9 @@ namespace CwiczeniaGD5
             return RawData;
 		} 
 
-		//================ParseData(ArrayList listToParse)
+		//================ParseRawData(ArrayList listToParse)
 
-		private void ParseData(ArrayList listToParse) {										// ArrayList jest skończona i nie będzie powiększana po uruchomieniu ParseData()
+		private void ParseRawData(ArrayList listToParse) {									// ArrayList jest skończona i nie będzie powiększana po uruchomieniu ParseData()
 
 			EntryCount = 0;                                                                 // licznik linii dla ArrayList powstałej po odczytaniu pliku 
 			foreach (string lineEntry in listToParse) {										
@@ -74,7 +73,9 @@ namespace CwiczeniaGD5
 			}
 		}
 
-		public string[,] GetSubDataEntries() {
+		public string[,] Parse() {
+			this.ListToParse = OpenFileSaveRawData(Path);
+			ParseRawData(ListToParse);
 			return SubData;
 		}
 	}

@@ -15,7 +15,7 @@ namespace CwiczeniaGD5 {
 
 			LinkedListGD linkedListGD = new LinkedListGD();
 
-			linkedListGD.ExecuteListGD(parser);
+			linkedListGD.ExecuteListGD(parser.Parse());
 
 		}
 	}
