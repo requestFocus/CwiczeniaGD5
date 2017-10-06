@@ -5,6 +5,8 @@ namespace CwiczeniaGD5 {
 	class LinkedListGD {
 
 		public NodeGD CurrentNode;						
+		public NodeGD Head;						
+		public NodeGD Tail;						
 		public int Count { get; private set; }
 
 		public LinkedListGD() {
@@ -31,49 +33,75 @@ namespace CwiczeniaGD5 {
 
 					//Console.WriteLine("Element " + nodeValue + " został dodany na początku listy.");
 
-					NodeGD MiddleToHead = CurrentNode;
-					GoToStart(ref MiddleToHead);						// znajdź początek listy
+					//NodeGD MiddleToHead = CurrentNode;
+					//GoToStart(ref MiddleToHead);						// znajdź początek listy
 
-					newNode.Previous = null;
-					newNode.Next = MiddleToHead;
-					MiddleToHead.Previous = newNode;
+					//newNode.Previous = null;
+					//newNode.Next = MiddleToHead;
+					//MiddleToHead.Previous = newNode;
+					//newNode.Value = nodeValue;
+					//CurrentNode = newNode;
+
 					newNode.Value = nodeValue;
-					CurrentNode = newNode;
+					newNode.Previous = null;
+					newNode.Next = Head;
+					Head.Previous = newNode;
+					Head = newNode;
 				}
 
 				else if (position == Count) {							// DODAJ ELEMENT NA KONCU
 
 					//Console.WriteLine("Element " + nodeValue + " został dodany na końcu listy.");
 
-					NodeGD MiddleToEnd = CurrentNode;
-					GoToStart(ref MiddleToEnd);							// znajdź początek listy
+					//NodeGD MiddleToEnd = CurrentNode;
+					//GoToStart(ref MiddleToEnd);							// znajdź początek listy
 
-					while (MiddleToEnd.Next != null) {                  // przesuwa na ostatni element listy
-						MiddleToEnd = MiddleToEnd.Next;
-					}
+					//while (MiddleToEnd.Next != null) {                  // przesuwa na ostatni element listy
+					//	MiddleToEnd = MiddleToEnd.Next;
+					//}
 
-					newNode.Previous = MiddleToEnd;
-					newNode.Next = null;
+					//newNode.Previous = MiddleToEnd;
+					//newNode.Next = null;
+					//newNode.Value = nodeValue;
+					//CurrentNode = newNode;
+
 					newNode.Value = nodeValue;
-					CurrentNode = newNode;
+					newNode.Next = null;
+					newNode.Previous = Tail;
+					Tail.Next = newNode;
+					Tail = newNode;
 				}
 
-				else {													// DODAJ ELEMENT W SRODKU
+				else {                                                  // DODAJ ELEMENT W SRODKU
 
 					//Console.WriteLine("Element " + nodeValue + " został dodany w środku listy.");
 
-					NodeGD HeadToMiddle = CurrentNode;
-					GoToStart(ref HeadToMiddle);						// znajdź początek listy
+					//NodeGD HeadToMiddle = CurrentNode;
+					//GoToStart(ref HeadToMiddle);						// znajdź początek listy
 
+					//for (int i = 0; i < position; i++) {                // przesuwa na wskazana pozycje
+					//	HeadToMiddle = HeadToMiddle.Next;
+					//}
+
+					//newNode.Previous = HeadToMiddle.Previous;
+					//newNode.Next = HeadToMiddle;
+					//HeadToMiddle.Previous = newNode;
+					//newNode.Value = nodeValue;
+					//CurrentNode = newNode;
+
+					NodeGD temp = Head;
 					for (int i = 0; i < position; i++) {                // przesuwa na wskazana pozycje
-						HeadToMiddle = HeadToMiddle.Next;
+						temp = temp.Next;
 					}
 
-					newNode.Previous = HeadToMiddle.Previous;
-					newNode.Next = HeadToMiddle;
-					HeadToMiddle.Previous = newNode;
+					Console.WriteLine("head value : " + temp.Value + " // insert value " + nodeValue + " // insert position " + position);
+
 					newNode.Value = nodeValue;
-					CurrentNode = newNode;
+					newNode.Previous = temp.Previous;
+					newNode.Next = temp;
+					temp.Previous = newNode;
+					temp.Previous.Next = newNode;
+
 				}
 
 			}
@@ -84,11 +112,15 @@ namespace CwiczeniaGD5 {
 				newNode.Next = null;
 				newNode.Value = nodeValue;
 				CurrentNode = newNode;
+
+				Head = newNode;
+				Tail = newNode;
+				Head.Previous = Head.Next = Tail.Previous = Tail.Next = null;
 			}
 			Count++;
 
-            //PrintListGD(ref CurrentNode, Count);                // aby umożliwić wypisanie zawartości listy po dodaniu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
-        }
+			PrintListGD(ref CurrentNode);                // aby umożliwić wypisanie zawartości listy po dodaniu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
+		}
 
 		//================DeleteNodeGD - USUŃ WĘZEŁ
 
@@ -140,17 +172,35 @@ namespace CwiczeniaGD5 {
 
 		//================PrintListGD - WYPISZ LISTĘ
 
-		private void PrintListGD(ref NodeGD node, int count) {
+		private void PrintListGD(ref NodeGD node) {
 
-			NodeGD PrintNode = node;
-			GoToStart(ref PrintNode);							// przejdź na początek listy
+			//NodeGD PrintNode = node;
+			//GoToStart(ref PrintNode);							// przejdź na początek listy
 
-			Console.Write("Lista: ");
-			while (PrintNode != null) {							// dopóki nie zostanie osiągnięty koniec listy
-				Console.Write(PrintNode.Value + " ");			// wypisz element listy
-				PrintNode = PrintNode.Next;						// i przejdź na następny
+			//Console.Write("Lista OLD WAY: ");
+			//while (PrintNode != null) {							// dopóki nie zostanie osiągnięty koniec listy
+			//	Console.Write(PrintNode.Value + " ");			// wypisz element listy
+			//	PrintNode = PrintNode.Next;						// i przejdź na następny
+			//}
+			//Console.WriteLine();
+
+			Console.Write("Lista od HEAD: ");
+			NodeGD temp1 = Head;
+			while (temp1 != null) {                         // dopóki nie zostanie osiągnięty koniec listy
+				Console.Write(temp1.Value + " ");           // wypisz element listy
+				temp1 = temp1.Next;                     // i przejdź na następny
 			}
 			Console.WriteLine();
+
+			Console.Write("Lista od TAIL: ");
+			NodeGD temp2 = Tail;
+			while (temp2 != null) {                         // dopóki nie zostanie osiągnięty koniec listy
+				Console.Write(temp2.Value + " ");           // wypisz element listy
+				temp2 = temp2.Previous;                     // i przejdź na następny
+			}
+			Console.WriteLine();
+			Console.WriteLine();
+
 		}
 
 		//================GoToStart - PRZEJDŹ DO POCZĄTKU LISTY
@@ -178,7 +228,7 @@ namespace CwiczeniaGD5 {
 					DeleteNodeGD(Int32.Parse(SubDataToParse[i, 1]));										// usuń go z listy wg danych z tablicy dwuwymiarowej
 			}
 
-            PrintListGD(ref CurrentNode, Count);                            // wypisz zawartość tablicy na ekran
+            //PrintListGD(ref CurrentNode);                            // wypisz zawartość tablicy na ekran
             Console.ReadLine();
 		}
 	}
