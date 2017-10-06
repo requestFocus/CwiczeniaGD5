@@ -49,7 +49,7 @@ namespace CwiczeniaGD5
 			foreach (string lineEntry in listToParse) {										
 				EntryCount++;																// liczy ilość rekordów w ArrayList
 			}
-			SubData = new string[EntryCount, 3];                                            // tablica dwuwymiarowa do przechowywania poszczególnych fragmentów rekordów z ArrayList
+			SubData = new string[listToParse.Count, 3];                                            // tablica dwuwymiarowa do przechowywania poszczególnych fragmentów rekordów z ArrayList
 			EntryCount = 0;
 
 			Regex regex_ins = new Regex(@"i_[0-9]+_[0-9]+", RegexOptions.IgnoreCase);		// regex dla insert

@@ -31,89 +31,35 @@ namespace CwiczeniaGD5 {
 
 				if (position == 0) {                                    // DODAJ ELEMENT NA POCZATKU
 
-					//Console.WriteLine("Element " + nodeValue + " został dodany na początku listy.");
-
-					//NodeGD MiddleToHead = CurrentNode;
-					//GoToStart(ref MiddleToHead);						// znajdź początek listy
-
-					//newNode.Previous = null;
-					//newNode.Next = MiddleToHead;
-					//MiddleToHead.Previous = newNode;
-					//newNode.Value = nodeValue;
-					//CurrentNode = newNode;
-
-					//Console.WriteLine("PRE head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
-
 					newNode.Previous = null;
 					newNode.Next = Head;
 					Head.Previous = newNode;
 					newNode.Value = nodeValue;
 					Head = newNode;
 
-					Console.WriteLine("POST head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
-
 				}
 
 				else if (position == Count) {                           // DODAJ ELEMENT NA KONCU
-
-					//Console.WriteLine("Element " + nodeValue + " został dodany na końcu listy.");
-
-					//NodeGD MiddleToEnd = CurrentNode;
-					//GoToStart(ref MiddleToEnd);							// znajdź początek listy
-
-					//while (MiddleToEnd.Next != null) {                  // przesuwa na ostatni element listy
-					//	MiddleToEnd = MiddleToEnd.Next;
-					//}
-
-					//newNode.Previous = MiddleToEnd;
-					//newNode.Next = null;
-					//newNode.Value = nodeValue;
-					//CurrentNode = newNode;
-
-					//Console.WriteLine("PRE head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
 
 					newNode.Previous = Tail;
 					newNode.Next = null;
 					Tail.Next = newNode;
 					newNode.Value = nodeValue;
 					Tail = newNode;
-
-					Console.WriteLine("POST head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
-
 				}
 
 				else {                                                  // DODAJ ELEMENT W SRODKU
-
-					//Console.WriteLine("Element " + nodeValue + " został dodany w środku listy.");
-
-					//NodeGD HeadToMiddle = CurrentNode;
-					//GoToStart(ref HeadToMiddle);						// znajdź początek listy
-
-					//for (int i = 0; i < position; i++) {                // przesuwa na wskazana pozycje
-					//	HeadToMiddle = HeadToMiddle.Next;
-					//}
-
-					//newNode.Previous = HeadToMiddle.Previous;
-					//newNode.Next = HeadToMiddle;
-					//HeadToMiddle.Previous = newNode;
-					//newNode.Value = nodeValue;
-					//CurrentNode = newNode;
 
 					NodeGD temp = Head;
 					for (int i = 0; i < position; i++) {                // przesuwa na wskazana pozycje
 						temp = temp.Next;
 					}
 
-					//Console.WriteLine("PRE head : " + Head.Value + " // temp : " + temp.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
-
 					newNode.Value = nodeValue;
 					newNode.Next = temp;
 					newNode.Previous = temp.Previous;
 					temp.Previous.Next = newNode;
-
-					Console.WriteLine("POST head : " + Head.Value + " // temp : " + temp.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
-
-
+					temp.Previous = newNode;
 				}
 
 			}
@@ -139,43 +85,42 @@ namespace CwiczeniaGD5 {
 
 			bool nodeFound = false;									// true, jeśli szukany element znajduje sie na liscie
 
-			NodeGD NodeToDelete = CurrentNode;
-			GoToStart(ref NodeToDelete);							// znajdź początek listy
+			NodeGD temp = Head;
 
-			while (NodeToDelete != null) {							// sprawdzaj dopoki aktualnie sprawdzany węzeł nie jest nullem
+			while (temp != null) {							// sprawdzaj dopoki aktualnie sprawdzany węzeł nie jest nullem
 
-				if (NodeToDelete.Value == nodeValue) {				// jesli wartosc sprawdzanego noda jest rowna szukanej wartosci
+				if (temp.Value == nodeValue) {				// jesli wartosc sprawdzanego noda jest rowna szukanej wartosci
 
-					if (NodeToDelete.Previous == null) {			// jesli znaleziono wartość na początku listy
+					if (temp.Previous == null) {            // jesli znaleziono wartość na początku listy
+						
 						//Console.WriteLine("Element " + nodeValue + " znajdował sie na początku listy i został usunięty.");
-
-						NodeToDelete.Next.Previous = null;
-						CurrentNode = NodeToDelete.Next;
+						temp.Next.Previous = null;
+						Head = temp.Next;
 					}
 
-					else if (NodeToDelete.Next == null) {			// jesli znaleziono wartość na koncu
+					else if (temp.Next == null) {           // jesli znaleziono wartość na koncu
+						
 						//Console.WriteLine("Element " + nodeValue + " znajdował sie na końcu listy i został usunięty.");
-
-						NodeToDelete.Previous.Next = null;
-						CurrentNode = NodeToDelete.Previous;
+						temp.Previous.Next = null;
+						Tail = temp.Previous;
 					}
 
-					else {											// jeśli znaleziono wartość w środku listy
+					else {                                // jeśli znaleziono wartość w środku listy
+						
 						//Console.WriteLine("Element " + nodeValue + " znajdował sie w środku listy i został usunięty.");
-
-						NodeToDelete.Previous.Next = NodeToDelete.Next;
-						NodeToDelete.Next.Previous = NodeToDelete.Previous;
-						CurrentNode = NodeToDelete.Next;
+						temp.Previous.Next = temp.Next;
+						temp.Next.Previous = temp.Previous;
+						//CurrentNode = temp.Next;
 					}
 
-					nodeFound = true;								// element wyznaczony do usuniecia znajduje sie na liście
+					nodeFound = true;						// element wyznaczony do usuniecia znajduje sie na liście
 					Count--;
 				}
 
-				NodeToDelete = NodeToDelete.Next;					// przejdz na nastepny węzeł
+				temp = temp.Next;							// przejdz na nastepny węzeł
 			}
 
-			if (!nodeFound)											// jesli elementu wyznaczonego do usuniecia nie ma na liscie
+			if (!nodeFound)									// jesli elementu wyznaczonego do usuniecia nie ma na liscie
 				Console.WriteLine("Element " + nodeValue + " nie jest elementem listy i nie może zostać usunięty");
 
             //PrintListGD(ref CurrentNode, Count);                    // aby umożliwić wypisanie zawartości listy po usunięciu elementu (jeśli odkomentowane - zakomentować wywołanie metody PrintListGD w metodzie ExecuteListGD)
@@ -192,14 +137,6 @@ namespace CwiczeniaGD5 {
 				temp1 = temp1.Next;                     // i przejdź na następny
 			}
 			Console.WriteLine();
-
-			//Console.Write("Lista od TAIL: ");
-			//NodeGD temp2 = Tail;
-			//while (temp2 != null) {                         // dopóki nie zostanie osiągnięty poczatek listy
-			//	Console.Write(temp2.Value + " ");           // wypisz element listy
-			//	temp2 = temp2.Previous;                     // i przejdź na poprzedni
-			//}
-			//Console.WriteLine();
 			Console.WriteLine();
 
 		}
