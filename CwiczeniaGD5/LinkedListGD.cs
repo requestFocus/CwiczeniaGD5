@@ -29,7 +29,7 @@ namespace CwiczeniaGD5 {
 
 			if (Count != 0) {											// jeśli lista istnieje 
 
-				if (position == 0) {									// DODAJ ELEMENT NA POCZATKU
+				if (position == 0) {                                    // DODAJ ELEMENT NA POCZATKU
 
 					//Console.WriteLine("Element " + nodeValue + " został dodany na początku listy.");
 
@@ -42,14 +42,19 @@ namespace CwiczeniaGD5 {
 					//newNode.Value = nodeValue;
 					//CurrentNode = newNode;
 
-					newNode.Value = nodeValue;
+					//Console.WriteLine("PRE head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
+
 					newNode.Previous = null;
 					newNode.Next = Head;
 					Head.Previous = newNode;
+					newNode.Value = nodeValue;
 					Head = newNode;
+
+					Console.WriteLine("POST head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
+
 				}
 
-				else if (position == Count) {							// DODAJ ELEMENT NA KONCU
+				else if (position == Count) {                           // DODAJ ELEMENT NA KONCU
 
 					//Console.WriteLine("Element " + nodeValue + " został dodany na końcu listy.");
 
@@ -65,11 +70,16 @@ namespace CwiczeniaGD5 {
 					//newNode.Value = nodeValue;
 					//CurrentNode = newNode;
 
-					newNode.Value = nodeValue;
-					newNode.Next = null;
+					//Console.WriteLine("PRE head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
+
 					newNode.Previous = Tail;
+					newNode.Next = null;
 					Tail.Next = newNode;
+					newNode.Value = nodeValue;
 					Tail = newNode;
+
+					Console.WriteLine("POST head : " + Head.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
+
 				}
 
 				else {                                                  // DODAJ ELEMENT W SRODKU
@@ -94,13 +104,15 @@ namespace CwiczeniaGD5 {
 						temp = temp.Next;
 					}
 
-					Console.WriteLine("head value : " + temp.Value + " // insert value " + nodeValue + " // insert position " + position);
+					//Console.WriteLine("PRE head : " + Head.Value + " // temp : " + temp.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
 
 					newNode.Value = nodeValue;
-					newNode.Previous = temp.Previous;
 					newNode.Next = temp;
-					temp.Previous = newNode;
+					newNode.Previous = temp.Previous;
 					temp.Previous.Next = newNode;
+
+					Console.WriteLine("POST head : " + Head.Value + " // temp : " + temp.Value + " // insert " + nodeValue + " // position " + position + " // tail " + Tail.Value);
+
 
 				}
 
@@ -111,7 +123,6 @@ namespace CwiczeniaGD5 {
 				newNode.Previous = null;
 				newNode.Next = null;
 				newNode.Value = nodeValue;
-				CurrentNode = newNode;
 
 				Head = newNode;
 				Tail = newNode;
@@ -174,16 +185,6 @@ namespace CwiczeniaGD5 {
 
 		private void PrintListGD(ref NodeGD node) {
 
-			//NodeGD PrintNode = node;
-			//GoToStart(ref PrintNode);							// przejdź na początek listy
-
-			//Console.Write("Lista OLD WAY: ");
-			//while (PrintNode != null) {							// dopóki nie zostanie osiągnięty koniec listy
-			//	Console.Write(PrintNode.Value + " ");			// wypisz element listy
-			//	PrintNode = PrintNode.Next;						// i przejdź na następny
-			//}
-			//Console.WriteLine();
-
 			Console.Write("Lista od HEAD: ");
 			NodeGD temp1 = Head;
 			while (temp1 != null) {                         // dopóki nie zostanie osiągnięty koniec listy
@@ -192,13 +193,13 @@ namespace CwiczeniaGD5 {
 			}
 			Console.WriteLine();
 
-			Console.Write("Lista od TAIL: ");
-			NodeGD temp2 = Tail;
-			while (temp2 != null) {                         // dopóki nie zostanie osiągnięty koniec listy
-				Console.Write(temp2.Value + " ");           // wypisz element listy
-				temp2 = temp2.Previous;                     // i przejdź na następny
-			}
-			Console.WriteLine();
+			//Console.Write("Lista od TAIL: ");
+			//NodeGD temp2 = Tail;
+			//while (temp2 != null) {                         // dopóki nie zostanie osiągnięty poczatek listy
+			//	Console.Write(temp2.Value + " ");           // wypisz element listy
+			//	temp2 = temp2.Previous;                     // i przejdź na poprzedni
+			//}
+			//Console.WriteLine();
 			Console.WriteLine();
 
 		}
