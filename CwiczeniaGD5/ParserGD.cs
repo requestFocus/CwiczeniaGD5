@@ -11,11 +11,8 @@ namespace CwiczeniaGD5
 		public string Path { get; private set; }  = "data.txt";
 		public ArrayList ListToParse { get; private set; }
 		public string[,] SubData { get; private set; }
-		public int EntryCount { get; private set; }
 
-		public ParserGD() {
-
-		}
+		public ParserGD() { }
 
 		//================OpenFileSaveRawData(string Path)
 
@@ -45,12 +42,8 @@ namespace CwiczeniaGD5
 
 		private void ParseRawData(ArrayList listToParse) {									// ArrayList jest skończona i nie będzie powiększana po uruchomieniu ParseData()
 
-			EntryCount = 0;                                                                 // licznik linii dla ArrayList powstałej po odczytaniu pliku 
-			foreach (string lineEntry in listToParse) {										
-				EntryCount++;																// liczy ilość rekordów w ArrayList
-			}
-			SubData = new string[listToParse.Count, 3];                                            // tablica dwuwymiarowa do przechowywania poszczególnych fragmentów rekordów z ArrayList
-			EntryCount = 0;
+			SubData = new string[listToParse.Count, 3];                                     // tablica dwuwymiarowa do przechowywania poszczególnych fragmentów rekordów z ArrayList
+			int entryCount = 0;
 
 			Regex regex_ins = new Regex(@"i_[0-9]+_[0-9]+", RegexOptions.IgnoreCase);		// regex dla insert
 			Regex regex_del = new Regex(@"d_[0-9]+", RegexOptions.IgnoreCase);				// regex dla delete
@@ -61,12 +54,12 @@ namespace CwiczeniaGD5
 
 				if (match_ins.Success || match_del.Success) {								// jeśli jedno lub drugie dopasowanie jest prawdziwe
 					string[] SubDataEntry = LineEntry.Split('_');							// do subFileEntry wpisywana jest tylko jedna linia na raz
-					SubData[EntryCount, 0] = SubDataEntry[0];								// wstaw string z SubDataEntry[0] do Subdata[i][0]
-					SubData[EntryCount, 1] = SubDataEntry[1];								// wstaw string z SubDataEntry[0] do Subdata[i][0]
+					SubData[entryCount, 0] = SubDataEntry[0];								// wstaw string z SubDataEntry[0] do Subdata[i][0]
+					SubData[entryCount, 1] = SubDataEntry[1];								// wstaw string z SubDataEntry[0] do Subdata[i][0]
 					if (SubDataEntry[0] == "i") {											// tylko jeśli pierwszy element Entry[] jest rowny i
-						SubData[EntryCount, 2] = SubDataEntry[2];							// wstaw string z SubDataEntry[2] do Subdata[i][2]
+						SubData[entryCount, 2] = SubDataEntry[2];							// wstaw string z SubDataEntry[2] do Subdata[i][2]
 					}
-					EntryCount++;															// przejście na kolejny indeks tablicy SubData[][]	
+					entryCount++;															// przejście na kolejny indeks tablicy SubData[][]	
 				}
 				else
 					Console.WriteLine("Wpis \"" + LineEntry + "\" posiada niewłaściwy format. Prawidłowy format to i_X_X lub d_X");
@@ -74,9 +67,9 @@ namespace CwiczeniaGD5
 		}
 
 		public string[,] Parse() {
-			this.ListToParse = OpenFileSaveRawData(Path);
-			ParseRawData(ListToParse);
-			return SubData;
+			this.ListToParse = OpenFileSaveRawData(Path);									// odczytaj surowe dane z pliku pod podaną ścieżką i zapisz je w pamięci w tablicy ArrayList
+			ParseRawData(ListToParse);														// sparsuj dane w tablicy ArrayList (wpisujac je do tablicy 2D)
+			return SubData;																	// zwroc tablice 2D ze szczegolami operacji dodawania i usuwania wezłów
 		}
 	}
 }
