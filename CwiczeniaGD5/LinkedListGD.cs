@@ -10,7 +10,7 @@ namespace CwiczeniaGD5 {
 
 		public LinkedListGD() {
 
-			Head = Tail = null;
+			Head = Tail = null; 
 		}
 
 		public class NodeGD {											// klasa zagnieżdżona NodeGD, bo węzeł nie ma sensu istnienia poza listą
