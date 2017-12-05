@@ -16,7 +16,7 @@ namespace CwiczeniaGD5 {
 		public class NodeGD {											// klasa zagnieżdżona NodeGD, bo węzeł nie ma sensu istnienia poza listą
 
 			public NodeGD Previous { get; set; }
-			public NodeGD Next { get; set; }
+			public NodeGD Next { get; set; } 
 			public int Value { get; set; }
 		}
 
